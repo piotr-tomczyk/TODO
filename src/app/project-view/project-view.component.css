@@ -1,0 +1,8 @@
+* {
+  --color01: #0c1c8c;
+  --color02: white;
+  --color03: #3a7728;
+}
+.content {
+  background-color: var(--color02);
+}

@@ -1,0 +1,27 @@
+* {
+  --color01: #0c1c8c;
+  --color02: white;
+  --color03: #3a7728;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--color01);
+  color: white;
+  /* padding: 0.5em, 1em; */
+  padding: 1em;
+  font-weight: 700;
+  font-size: 1.5em;
+}
+.left {
+  display: flex;
+  gap: 1em;
+}
+
+@media only screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 1em;
+  }
+}
