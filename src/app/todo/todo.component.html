@@ -1,4 +1,15 @@
-<button (click)="AddProject()">Add Project</button>
-<div *ngFor="let project of projects">
-  <div>{{ project.name }}</div>
+<button mat-raised-button (click)="AddProject()">Add Project</button>
+<div *ngIf="this.projects.length > 0">
+  <!-- todo!!!! change from select and option to mat-select  and mat-option -->
+  <h3>Select a project</h3>
+  <mat-form-field appearance="fill">
+    <mat-label>Project</mat-label>
+    <select matNativeControl (change)="selectProject($event)">
+      <option value="None">None</option>
+      <option *ngFor="let project of this.projects" [value]="project.name">
+        {{ project.name }}
+      </option>
+    </select>
+  </mat-form-field>
+  <p>You selected: {{ selectedProject.name }}</p>
 </div>

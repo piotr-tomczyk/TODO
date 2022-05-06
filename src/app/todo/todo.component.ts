@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Project } from '../assets/project';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+
 import {
   ProjectPopupComponent,
   PopupResult,
@@ -13,17 +15,32 @@ import {
 export class TODOComponent {
   constructor(private dialog: MatDialog) {}
   projects: Project[] = [];
+  selectedProject: Project = { name: '' };
   AddProject(): void {
     const dialogRef = this.dialog.open(ProjectPopupComponent, {
       width: '270px',
+      maxHeight: '40vh',
       data: {},
     });
     dialogRef.afterClosed().subscribe((result: PopupResult) => {
-      if (!result) {
+      if (result.project == null) {
         return;
       }
-      console.log(result);
       this.projects.push(result.project);
+    });
+  }
+  selectProject(event: Event): void {
+    let projectName = (event.target as HTMLSelectElement).value;
+    console.log(this.selectProject.name, projectName);
+    if (projectName == 'None') {
+      this.selectedProject = { name: '' };
+      return;
+    }
+    this.projects.forEach((project) => {
+      if (project.name == projectName) {
+        this.selectedProject = project;
+        return;
+      }
     });
   }
 }
