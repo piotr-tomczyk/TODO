@@ -3,13 +3,27 @@
   <!-- todo!!!! change from select and option to mat-select  and mat-option -->
   <h3>Select a project</h3>
   <mat-form-field appearance="fill">
-    <mat-label>Project</mat-label>
-    <select matNativeControl (change)="selectProject($event)">
-      <option value="None">None</option>
-      <option *ngFor="let project of this.projects" [value]="project.name">
+    <mat-label>Select an option</mat-label>
+    <mat-select
+      [(value)]="selectedProject"
+      disableOptionCentering
+      panelClass="selectClass"
+    >
+      <mat-option [value]="null">None</mat-option>
+      <mat-option *ngFor="let project of this.projects" [value]="project">
         {{ project.name }}
-      </option>
-    </select>
+      </mat-option>
+    </mat-select>
   </mat-form-field>
-  <p>You selected: {{ selectedProject.name }}</p>
+  <div ngClass="projectView" *ngIf="this.selectedProject != null">
+    <p>You selected: {{ selectedProject.name }}</p>
+    <div *ngIf="selectedProject.tasks">
+      <app-task-view
+        *ngFor="let task of this.selectedProject.tasks"
+        [task]="task"
+      >
+      </app-task-view>
+    </div>
+    <button mat-raised-button (click)="AddTask()">Add Task</button>
+  </div>
 </div>

@@ -1,0 +1,7 @@
+<div *ngIf="task" ngClass="task">
+  <mat-checkbox [(ngModel)]="task.done">
+    {{ task.name }}
+  </mat-checkbox>
+  <div>{{ task.description }}</div>
+  <div>{{ task.done }}</div>
+</div>

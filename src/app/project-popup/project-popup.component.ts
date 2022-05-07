@@ -15,6 +15,6 @@ export class ProjectPopupComponent {
     this.dialogRef.close(this.data);
   }
 }
-export interface PopupResult {
-  project: Project;
+export interface ProjectPopupResult {
+  project: Project | null;
 }

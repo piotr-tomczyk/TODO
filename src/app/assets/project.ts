@@ -6,5 +6,5 @@ export interface Project {
 export interface Task {
   name: string;
   description?: string;
-  active: boolean;
+  done: boolean;
 }
