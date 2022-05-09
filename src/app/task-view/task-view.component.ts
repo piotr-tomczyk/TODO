@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../assets/project';
 
 @Component({
@@ -8,4 +8,5 @@ import { Task } from '../assets/project';
 })
 export class TaskViewComponent {
   @Input() task: Task | null = null;
+  @Output() delete = new EventEmitter<Task>();
 }

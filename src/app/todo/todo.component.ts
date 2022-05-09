@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Project } from '../assets/project';
+import { Project, Task } from '../assets/project';
 import { MatDialog } from '@angular/material/dialog';
 
 import {
@@ -27,17 +27,13 @@ export class TODOComponent {
       data: {},
     });
     dialogRef.afterClosed().subscribe((result: ProjectPopupResult) => {
-      console.log(result);
       if (result.project === null || !result.project.name) {
         return;
       }
-      let IsTheSame = false;
-      this.projects.forEach((project) => {
-        if (project.name == result.project?.name) {
-          IsTheSame = true;
-        }
-      });
-      if (IsTheSame) {
+      let foundProject: Project | undefined = this.projects.find(
+        (project) => project.name == result.project?.name
+      );
+      if (foundProject != undefined) {
         return;
       }
       this.projects.push(result.project);
@@ -50,19 +46,24 @@ export class TODOComponent {
       data: {},
     });
     dialogRef.afterClosed().subscribe((result: TaskPopupResult) => {
-      console.log(result);
-      console.log(this.selectedProject?.tasks);
       if (result.task === null || !result.task.name) {
         return;
       }
       if (this.selectedProject != null) {
         if (this.selectedProject?.tasks === undefined) {
           this.selectedProject.tasks = [];
+          this.selectedProject.highestIndex = 0;
         }
         result.task.done = false;
+        result.task.id = this.selectedProject.highestIndex;
+        this.selectedProject.highestIndex++;
         this.selectedProject?.tasks?.push(result.task);
       }
     });
+  }
+  DeleteTask(taskToDelete: Task): void {
+    let idOfTask = this.selectedProject?.tasks?.indexOf(taskToDelete);
+    if (idOfTask != undefined) this.selectedProject?.tasks?.splice(idOfTask, 1);
   }
   selectProject(event: Event): void {
     let projectName = (event.target as HTMLSelectElement).value;

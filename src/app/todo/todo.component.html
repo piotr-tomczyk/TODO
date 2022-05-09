@@ -1,29 +1,34 @@
-<button mat-raised-button (click)="AddProject()">Add Project</button>
-<div *ngIf="this.projects.length > 0">
-  <!-- todo!!!! change from select and option to mat-select  and mat-option -->
-  <h3>Select a project</h3>
-  <mat-form-field appearance="fill">
-    <mat-label>Select an option</mat-label>
-    <mat-select
-      [(value)]="selectedProject"
-      disableOptionCentering
-      panelClass="selectClass"
-    >
-      <mat-option [value]="null">None</mat-option>
-      <mat-option *ngFor="let project of this.projects" [value]="project">
-        {{ project.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <div ngClass="projectView" *ngIf="this.selectedProject != null">
-    <p>You selected: {{ selectedProject.name }}</p>
-    <div *ngIf="selectedProject.tasks">
-      <app-task-view
-        *ngFor="let task of this.selectedProject.tasks"
-        [task]="task"
+<div class="content">
+  <button (click)="AddProject()" ngClass="add-project-button">
+    Add Project
+  </button>
+  <div *ngIf="this.projects.length > 0" ngClass="flex-column">
+    <!-- todo!!!! change from select and option to mat-select  and mat-option -->
+    <h3>Select a project</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Select an option</mat-label>
+      <mat-select
+        [(value)]="selectedProject"
+        disableOptionCentering
+        panelClass="selectClass"
       >
-      </app-task-view>
+        <mat-option [value]="null">None</mat-option>
+        <mat-option *ngFor="let project of this.projects" [value]="project">
+          {{ project.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="this.selectedProject != null" ngClass="flex-column task-column">
+      <p>You selected: {{ selectedProject.name }}</p>
+      <div *ngIf="selectedProject.tasks">
+        <app-task-view
+          *ngFor="let task of this.selectedProject.tasks"
+          [task]="task"
+          (delete)="DeleteTask(task)"
+        >
+        </app-task-view>
+      </div>
+      <button (click)="AddTask()">Add Task</button>
     </div>
-    <button mat-raised-button (click)="AddTask()">Add Task</button>
   </div>
 </div>

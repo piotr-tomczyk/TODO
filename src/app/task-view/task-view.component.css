@@ -1,0 +1,27 @@
+* {
+  --color01: #0c1c8c;
+  --color02: white;
+  --color03: #3a7728;
+}
+.task {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  width: 60em;
+  margin-top: 1.5em;
+}
+.checked {
+  text-decoration: line-through;
+}
+.task-view {
+  margin-left: 2em;
+  padding: 1em 1.33em;
+}
+button {
+  margin-right: 2em;
+  background-color: var(--color01);
+  color: var(--color02);
+  border-style: none;
+  padding: 1em 1.33em;
+  border-radius: 1em;
+}

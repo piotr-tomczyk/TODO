@@ -1,9 +1,34 @@
-@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "@angular/material/prebuilt-themes/purple-green.css";
 * {
   --color01: #0c1c8c;
   --color02: white;
   --color03: #3a7728;
 }
 button {
-  background-color: #0c1c8c;
+  background-color: var(--color01);
+  color: var(--color02);
+  border-style: none;
+  padding: 2em 1.33em;
+  width: 60em;
+  border-radius: 1em;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.content {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+.task-column {
+  gap: 2em;
+}
+.add-project-button {
+  /* align-self: center; */
 }

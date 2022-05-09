@@ -1,7 +1,10 @@
 <div *ngIf="task" ngClass="task">
-  <mat-checkbox [(ngModel)]="task.done">
-    {{ task.name }}
-  </mat-checkbox>
-  <div>{{ task.description }}</div>
-  <div>{{ task.done }}</div>
+  <div class="task-view">
+    <mat-checkbox [(ngModel)]="task.done" [ngClass]="{ checked: task.done }">
+      {{ task.name }}
+    </mat-checkbox>
+
+    <div>{{ task.description }}</div>
+  </div>
+  <button type="button" (click)="delete.emit(task)">Delete</button>
 </div>
