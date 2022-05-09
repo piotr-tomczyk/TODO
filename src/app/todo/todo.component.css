@@ -29,6 +29,11 @@ button {
 .task-column {
   gap: 2em;
 }
-.add-project-button {
-  /* align-self: center; */
+h1 {
+  font-weight: 500;
+}
+@media only screen and (max-width: 768px) {
+  button {
+    width: 90vw;
+  }
 }

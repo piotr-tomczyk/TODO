@@ -4,7 +4,7 @@
   </button>
   <div *ngIf="this.projects.length > 0" ngClass="flex-column">
     <!-- todo!!!! change from select and option to mat-select  and mat-option -->
-    <h3>Select a project</h3>
+    <h1>Select a project</h1>
     <mat-form-field appearance="fill">
       <mat-label>Select an option</mat-label>
       <mat-select
@@ -19,7 +19,7 @@
       </mat-select>
     </mat-form-field>
     <div *ngIf="this.selectedProject != null" ngClass="flex-column task-column">
-      <p>You selected: {{ selectedProject.name }}</p>
+      <p>Project selected: {{ selectedProject.name }}</p>
       <div *ngIf="selectedProject.tasks">
         <app-task-view
           *ngFor="let task of this.selectedProject.tasks"
@@ -28,7 +28,7 @@
         >
         </app-task-view>
       </div>
-      <button (click)="AddTask()">Add Task</button>
+      <button (click)="AddTask()" ngClass="add-task-button">Add Task</button>
     </div>
   </div>
 </div>

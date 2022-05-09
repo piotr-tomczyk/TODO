@@ -22,6 +22,14 @@ button {
   background-color: var(--color01);
   color: var(--color02);
   border-style: none;
-  padding: 1em 1.33em;
+  padding-left: 0.7em;
+  padding-right: 0.7em;
+  border-radius: 50% !important;
   border-radius: 1em;
+}
+
+@media only screen and (max-width: 768px) {
+  .task {
+    width: 90vw;
+  }
 }
