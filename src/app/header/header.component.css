@@ -16,9 +16,12 @@
 }
 .left {
   display: flex;
-  gap: 1em;
+  gap: 7px;
 }
-
+img {
+  width: 1em;
+  height: 1em;
+}
 @media only screen and (max-width: 768px) {
   .header {
     flex-direction: column;

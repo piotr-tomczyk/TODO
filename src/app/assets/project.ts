@@ -1,12 +1,12 @@
 export interface Project {
   name: string;
-  description?: string;
-  tasks?: Task[];
+  description: string;
+  tasks: Task[];
   highestIndex: number;
 }
 export interface Task {
   id: number;
   name: string;
-  description?: string;
+  description: string;
   done: boolean;
 }

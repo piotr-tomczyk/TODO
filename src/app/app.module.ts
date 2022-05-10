@@ -17,6 +17,10 @@ import { FormsModule } from '@angular/forms';
 import { TaskViewComponent } from './task-view/task-view.component';
 import { TaskPopupComponent } from './task-popup/task-popup.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +29,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ProjectPopupComponent,
     TaskViewComponent,
     TaskPopupComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +43,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FormsModule,
     MatSelectModule,
     MatCheckboxModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

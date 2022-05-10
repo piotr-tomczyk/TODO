@@ -1,25 +1,42 @@
+<app-header></app-header>
 <div class="content">
   <button (click)="AddProject()" ngClass="add-project-button">
     Add Project
   </button>
-  <div *ngIf="this.projects.length > 0" ngClass="flex-column">
-    <!-- todo!!!! change from select and option to mat-select  and mat-option -->
-    <h1>Select a project</h1>
-    <mat-form-field appearance="fill">
-      <mat-label>Select an option</mat-label>
-      <mat-select
-        [(value)]="selectedProject"
-        disableOptionCentering
-        panelClass="selectClass"
-      >
-        <mat-option [value]="null">None</mat-option>
-        <mat-option *ngFor="let project of this.projects" [value]="project">
-          {{ project.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+  <div *ngIf="this.projectsLenght > 0" ngClass="flex-column">
+    <div class="project-selection">
+      <h1>Select a project</h1>
+      <mat-form-field appearance="fill">
+        <mat-label>Select an option</mat-label>
+        <mat-select
+          [(value)]="selectedProject"
+          disableOptionCentering
+          panelClass="selectClass"
+        >
+          <mat-option [value]="null">None</mat-option>
+          <mat-option
+            *ngFor="let project of this.projects | async"
+            [value]="project"
+          >
+            {{ project.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div *ngIf="this.selectedProject != null" ngClass="flex-column task-column">
-      <p>Project selected: {{ selectedProject.name }}</p>
+      <div class="project-select-info">
+        <div ngClass="select-project">
+          Selected project:
+          <p>{{ selectedProject.name }}</p>
+        </div>
+        <button
+          (click)="DeleteProject()"
+          *ngIf="this.selectedProject != null"
+          ngClass="small-button"
+        >
+          Delete Project
+        </button>
+      </div>
       <div *ngIf="selectedProject.tasks">
         <app-task-view
           *ngFor="let task of this.selectedProject.tasks"

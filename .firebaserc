@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "todo-ac19c": {
+      "hosting": {
+        "TODO": [
+          "todo-ac19c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "todo-ac19c"
+  }
+}

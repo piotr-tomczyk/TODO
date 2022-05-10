@@ -11,6 +11,7 @@ button {
   padding: 2em 1.33em;
   width: 60em;
   border-radius: 1em;
+  font-size: 1.3em;
 }
 .flex-column {
   display: flex;
@@ -29,11 +30,45 @@ button {
 .task-column {
   gap: 2em;
 }
+.project-select-info {
+  display: flex;
+  gap: 1em;
+  height: 4.5em;
+}
+.small-button {
+  width: auto;
+  padding: 1em 1.33em;
+}
+.project-selection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 h1 {
   font-weight: 500;
+}
+p {
+  font-weight: 500;
+}
+.select-project {
+  padding: 1em 1.33em;
+  display: flex;
+  gap: 3px;
+  font-size: 1.4em;
 }
 @media only screen and (max-width: 768px) {
   button {
     width: 90vw;
+    font-size: 1em;
+  }
+  .project-select-info {
+    flex-direction: column;
+  }
+  .select-project {
+    padding: 0;
+  }
+  .add-task-button {
+    margin-bottom: 4em;
   }
 }

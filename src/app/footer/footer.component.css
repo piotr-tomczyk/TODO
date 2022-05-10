@@ -1,0 +1,15 @@
+* {
+  --color01: #0c1c8c;
+  --color02: white;
+  --color03: #3a7728;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color01);
+  color: white;
+  padding: 1em;
+  font-weight: 700;
+  font-size: 1.5em;
+}
