@@ -16,8 +16,22 @@
 .task-view {
   margin-left: 2em;
   padding: 1em 1.33em;
+  align-self: flex-start;
 }
-button {
+.task-desc {
+  font-size: 1.4em;
+  margin-top: 1em;
+  padding-left: 3em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+p {
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.button-task {
   margin-right: 2em;
   background-color: var(--color01);
   color: var(--color02);
@@ -26,6 +40,8 @@ button {
   padding-right: 0.7em;
   border-radius: 50% !important;
   border-radius: 1em;
+  width: 4.2em;
+  height: 4.2em;
 }
 .mat-checkbox {
   font-size: 1.4em;
@@ -33,5 +49,60 @@ button {
 @media only screen and (max-width: 768px) {
   .task {
     width: 90vw;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .buttons {
+    margin-left: 2em;
+    padding: 1em 1.33em;
+    align-self: flex-start;
+  }
+  .task-desc {
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 0;
   }
 }
+/* * {
+  --color01: #0c1c8c;
+  --color02: white;
+  --color03: #3a7728;
+}
+.task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+  width: 60em;
+  margin-top: 1.5em;
+}
+.checked {
+  text-decoration: line-through;
+}
+.task-view {
+  display: flex;
+  margin-left: 2em;
+  justify-content: space-between;
+  padding: 1em 1.33em;
+}
+button {
+  margin-right: 2em;
+  background-color: var(--color01);
+  color: var(--color02);
+  border-style: none;
+  padding-left: 0.7em !important;
+  padding-right: 0.7em !important;
+  border-radius: 50% !important;
+  border-radius: 1em;
+}
+.mat-checkbox {
+  font-size: 1.4em;
+}
+.taks-desc {
+  text-align: center;
+}
+@media only screen and (max-width: 768px) {
+  .task {
+    width: 90vw;
+  }
+} */

@@ -57,6 +57,9 @@ p {
   gap: 3px;
   font-size: 1.4em;
 }
+.project-desc {
+  margin-top: 1.5em;
+}
 @media only screen and (max-width: 768px) {
   button {
     width: 90vw;

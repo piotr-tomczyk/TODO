@@ -37,11 +37,20 @@
           Delete Project
         </button>
       </div>
-      <div *ngIf="selectedProject.tasks">
+      <div
+        ngClass="select-project project-desc"
+        *ngIf="this.selectedProject.description"
+      >
+        About:
+        <p>{{ selectedProject.description }}</p>
+      </div>
+      <h2 *ngIf="selectedProject.tasks.length > 0">TASKS</h2>
+      <div *ngIf="selectedProject.tasks.length > 0">
         <app-task-view
           *ngFor="let task of this.selectedProject.tasks"
           [task]="task"
           (delete)="DeleteTask(task)"
+          (change)="ChangeTask(task)"
         >
         </app-task-view>
       </div>

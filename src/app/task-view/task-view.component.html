@@ -1,10 +1,55 @@
-<div *ngIf="task" ngClass="task">
-  <div class="task-view">
-    <mat-checkbox [(ngModel)]="task.done" [ngClass]="{ checked: task.done }">
+<div
+  *ngIf="task"
+  ngClass="task"
+  [ngClass]="{ 'task-about': task.description, task: true }"
+>
+  <div ngClass="task-view">
+    <mat-checkbox
+      [ngClass]="{ checked: task.done }"
+      (change)="change.emit(task)"
+    >
       {{ task.name }}
     </mat-checkbox>
+  </div>
+  <div ngClass="buttons">
+    <button
+      type="button"
+      (click)="this.description = !this.description"
+      *ngIf="task.description"
+      ngClass="button-task"
+    >
+      About
+    </button>
+    <button type="button" (click)="delete.emit(task)" ngClass="button-task">
+      Delete
+    </button>
+  </div>
+</div>
+<div ngClass="task-desc" *ngIf="this.description">
+  <div>About:</div>
 
+  <p>{{ task?.description }}</p>
+</div>
+<!-- <div *ngIf="task" ngClass="task">
+  <div class="task-view">
+    <mat-checkbox
+      [ngClass]="{ checked: task.done }"
+      (change)="change.emit(task)"
+    >
+      {{ task.name }}
+    </mat-checkbox>
+    <div>
+      <button type="button" (click)="delete.emit(task)">Delete</button>
+      <button
+        type="button"
+        *ngIf="task.description"
+        (click)="this.description = !this.description"
+      >
+        About
+      </button>
+    </div>
+  </div>
+  <div ngClass="mat-checkbox task-desc" *ngIf="this.description">
     <div>{{ task.description }}</div>
   </div>
-  <button type="button" (click)="delete.emit(task)">Delete</button>
-</div>
+</div> -->

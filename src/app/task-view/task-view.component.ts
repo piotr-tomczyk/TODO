@@ -7,6 +7,8 @@ import { Task } from '../assets/project';
   styleUrls: ['./task-view.component.css'],
 })
 export class TaskViewComponent {
+  description = false;
   @Input() task: Task | null = null;
   @Output() delete = new EventEmitter<Task>();
+  @Output() change = new EventEmitter<Task>();
 }

@@ -42,7 +42,6 @@ export class TODOComponent implements OnInit {
       if (result.project === null || !result.project.name) {
         return;
       }
-      console.log(this.localProjects);
       let foundProject: Project | undefined = this.localProjects.find(
         (project) => project.name == result.project?.name
       );
@@ -51,9 +50,10 @@ export class TODOComponent implements OnInit {
       }
       result.project.tasks = [];
       result.project.highestIndex = 0;
+      result.project.id = this.store.createId();
       this.store
         .collection('projects')
-        .doc(result.project.name)
+        .doc(result.project.id)
         .set(result.project);
     });
   }
@@ -73,10 +73,10 @@ export class TODOComponent implements OnInit {
         result.task.id = this.selectedProject.highestIndex;
         this.selectedProject.highestIndex++;
         this.selectedProject.tasks.push(result.task);
-        this.store
-          .collection('projects')
-          .doc(this.selectedProject.name)
-          .update({ tasks: this.selectedProject.tasks });
+        this.store.collection('projects').doc(this.selectedProject.id).update({
+          highestIndex: this.selectedProject.highestIndex,
+          tasks: this.selectedProject.tasks,
+        });
       }
     });
   }
@@ -84,15 +84,29 @@ export class TODOComponent implements OnInit {
     if (this.selectedProject != undefined) {
       let idOfTask = this.selectedProject.tasks.indexOf(taskToDelete);
       if (idOfTask != undefined) this.selectedProject.tasks.splice(idOfTask, 1);
+      console.log(this.selectedProject);
       this.store
         .collection('projects')
-        .doc(this.selectedProject.name)
-        .update(this.selectedProject.tasks);
+        .doc(this.selectedProject.id)
+        .update({ tasks: this.selectedProject.tasks });
+    }
+  }
+  ChangeTask(taskToChange: Task): void {
+    console.log(taskToChange);
+    if (this.selectedProject != undefined) {
+      let idOfTask = this.selectedProject.tasks.indexOf(taskToChange);
+      if (idOfTask != undefined)
+        this.selectedProject.tasks[idOfTask].done = !taskToChange.done;
+      console.log(this.selectedProject);
+      this.store
+        .collection('projects')
+        .doc(this.selectedProject.id)
+        .update({ tasks: this.selectedProject.tasks });
     }
   }
   DeleteProject(): void {
     if (this.selectedProject != undefined) {
-      this.store.collection('projects').doc(this.selectedProject.name).delete();
+      this.store.collection('projects').doc(this.selectedProject.id).delete();
       this.selectedProject = null;
     }
   }
