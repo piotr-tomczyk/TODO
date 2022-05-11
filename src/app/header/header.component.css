@@ -13,6 +13,7 @@
   padding: 1em;
   font-weight: 700;
   font-size: 1.5em;
+  max-height: 2em;
 }
 .left {
   display: flex;
@@ -22,9 +23,28 @@ img {
   width: 1em;
   height: 1em;
 }
+.profile {
+  display: flex;
+  gap: 1em;
+}
+.profile-picture {
+  width: 2em;
+  height: 2em;
+}
+.button {
+  background-color: var(--color03);
+  color: var(--color02);
+  border-style: none;
+  padding: 1em 1.33em;
+  border-radius: 1em;
+  height: 3.5em;
+}
 @media only screen and (max-width: 768px) {
   .header {
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 1em;
+    max-height: 10em;
   }
 }

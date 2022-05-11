@@ -1,7 +1,19 @@
 <div class="header">
   <div class="left">
-    <img src="../../assets/check.svg" alt="check" />
+    <img src="./assets/check.svg" alt="check" />
     <div>TO DO API</div>
   </div>
-  <div class="right"><div>Piotr Tomczyk</div></div>
+  <div class="right">
+    <div *ngIf="auth.user$ | async; then authenticated"></div>
+    <ng-template #authenticated>
+      <div *ngIf="auth.user$ | async as user" class="profile">
+        <img [src]="user.photoURL" ngClass="profile-picture" />
+        <h4>
+          Hello!,
+          <p>{{ user.displayName }}</p>
+        </h4>
+        <button (click)="this.auth.signOut()" ngClass="button">Sign Out</button>
+      </div>
+    </ng-template>
+  </div>
 </div>

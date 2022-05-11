@@ -1,0 +1,33 @@
+<app-header></app-header>
+<div *ngIf="auth.user$ | async; then authenticated; else guest"></div>
+
+<!-- User NOT logged in -->
+<ng-template #guest>
+  <div class="logged">
+    <h3>
+      Hello,
+      <p>Login to get started...</p>
+    </h3>
+
+    <button (click)="auth.googleSignin()">
+      <i class="fa fa-google"></i> Log In
+    </button>
+  </div>
+</ng-template>
+
+<!-- User logged in -->
+<ng-template #authenticated>
+  <div *ngIf="auth.user$ | async as user" ngClass="logged">
+    <div class="logged-data">
+      <img [src]="user.photoURL" />
+      <h3>
+        Hello,
+        <p>{{ user.displayName }}</p>
+      </h3>
+    </div>
+    <div class="buttons">
+      <button (click)="NavigateTODO()">TASKS</button>
+      <button (click)="auth.signOut()">Logout</button>
+    </div>
+  </div>
+</ng-template>

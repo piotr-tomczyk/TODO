@@ -21,6 +21,8 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FooterComponent } from './footer/footer.component';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { LoginViewComponent } from './login-view/login-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +32,7 @@ import { FooterComponent } from './footer/footer.component';
     TaskViewComponent,
     TaskPopupComponent,
     FooterComponent,
+    LoginViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { FooterComponent } from './footer/footer.component';
     MatCheckboxModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

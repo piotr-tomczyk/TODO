@@ -1,0 +1,38 @@
+.logged {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: 2em;
+}
+.logged-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  font-size: 1.3em;
+}
+img {
+  width: 5em;
+  height: 5em;
+}
+button {
+  background-color: var(--color01);
+  color: var(--color02);
+  border-style: none;
+  padding: 1em 1.33em;
+  width: 8em;
+  border-radius: 1em;
+  font-size: 1.3em;
+}
+.buttons {
+  display: flex;
+  gap: 2em;
+}
+h3 {
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}

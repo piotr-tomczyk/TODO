@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Project, Task } from '../assets/project';
 import { MatDialog } from '@angular/material/dialog';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { Observable, subscribeOn } from 'rxjs';
 import {
   ProjectPopupComponent,
   ProjectPopupResult,
@@ -11,13 +11,18 @@ import {
   TaskPopupComponent,
   TaskPopupResult,
 } from '../task-popup/task-popup.component';
+import { AuthService } from '../Services/auth.service';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css'],
 })
 export class TODOComponent implements OnInit {
-  constructor(private dialog: MatDialog, private store: AngularFirestore) {}
+  constructor(
+    private dialog: MatDialog,
+    private store: AngularFirestore,
+    public auth: AuthService
+  ) {}
   ngOnInit(): void {
     this.projects.subscribe((val) => {
       this.projectsLenght = val.length;
@@ -26,12 +31,13 @@ export class TODOComponent implements OnInit {
       this.localProjects = val;
     });
   }
-  projects = this.store.collection('projects').valueChanges() as Observable<
-    Project[]
-  >;
+  projects = this.store
+    .collection(`users/${this.auth.getUser().uid}/projects`)
+    .valueChanges() as Observable<Project[]>;
   selectedProject: Project | null = null;
   projectsLenght = 0;
   localProjects: Project[] = [];
+  isLoggedIn = false;
   AddProject(): void {
     const dialogRef = this.dialog.open(ProjectPopupComponent, {
       width: '270px',
@@ -52,7 +58,7 @@ export class TODOComponent implements OnInit {
       result.project.highestIndex = 0;
       result.project.id = this.store.createId();
       this.store
-        .collection('projects')
+        .collection(`users/${this.auth.getUser().uid}/projects`)
         .doc(result.project.id)
         .set(result.project);
     });
@@ -73,10 +79,13 @@ export class TODOComponent implements OnInit {
         result.task.id = this.selectedProject.highestIndex;
         this.selectedProject.highestIndex++;
         this.selectedProject.tasks.push(result.task);
-        this.store.collection('projects').doc(this.selectedProject.id).update({
-          highestIndex: this.selectedProject.highestIndex,
-          tasks: this.selectedProject.tasks,
-        });
+        this.store
+          .collection(`users/${this.auth.getUser().uid}/projects`)
+          .doc(this.selectedProject.id)
+          .update({
+            highestIndex: this.selectedProject.highestIndex,
+            tasks: this.selectedProject.tasks,
+          });
       }
     });
   }
@@ -86,7 +95,7 @@ export class TODOComponent implements OnInit {
       if (idOfTask != undefined) this.selectedProject.tasks.splice(idOfTask, 1);
       console.log(this.selectedProject);
       this.store
-        .collection('projects')
+        .collection(`users/${this.auth.getUser().uid}/projects`)
         .doc(this.selectedProject.id)
         .update({ tasks: this.selectedProject.tasks });
     }
@@ -99,14 +108,17 @@ export class TODOComponent implements OnInit {
         this.selectedProject.tasks[idOfTask].done = !taskToChange.done;
       console.log(this.selectedProject);
       this.store
-        .collection('projects')
+        .collection(`users/${this.auth.getUser().uid}/projects`)
         .doc(this.selectedProject.id)
         .update({ tasks: this.selectedProject.tasks });
     }
   }
   DeleteProject(): void {
     if (this.selectedProject != undefined) {
-      this.store.collection('projects').doc(this.selectedProject.id).delete();
+      this.store
+        .collection(`users/${this.auth.getUser().uid}/projects`)
+        .doc(this.selectedProject.id)
+        .delete();
       this.selectedProject = null;
     }
   }
